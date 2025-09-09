@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Move, RotateCcw, RotateCw } from 'lucide-react';
+import { Move, RotateCcw, RotateCw, RefreshCcw } from 'lucide-react';
 import type { BlockType } from '@/lib/types';
 
 interface CodePaletteProps {
@@ -13,6 +13,7 @@ const availableBlocks: { type: BlockType; label: string; icon: React.ReactNode }
   { type: 'move', label: 'Move Forward', icon: <Move className="mr-2 h-4 w-4" /> },
   { type: 'turn-left', label: 'Turn Left', icon: <RotateCcw className="mr-2 h-4 w-4" /> },
   { type: 'turn-right', label: 'Turn Right', icon: <RotateCw className="mr-2 h-4 w-4" /> },
+  { type: 'repeat', label: 'Repeat', icon: <RefreshCcw className="mr-2 h-4 w-4" /> },
 ];
 
 export function CodePalette({ addBlock }: CodePaletteProps) {

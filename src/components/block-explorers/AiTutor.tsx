@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,18 +13,28 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { getSimpleSummary } from '@/app/actions';
 
-export function AiTutor() {
+interface AiTutorProps {
+  challengeDescription: string;
+}
+
+export function AiTutor({ challengeDescription }: AiTutorProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [summary, setSummary] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Reset summary when the description changes (i.e., new level)
+    setSummary('');
+    setError('');
+  }, [challengeDescription]);
 
   const handleGetHint = async () => {
     setIsDialogOpen(true);
     if (summary || error) return;
     
     setIsLoading(true);
-    const result = await getSimpleSummary();
+    const result = await getSimpleSummary({ challengeDescription });
     if (result.error) {
       setError(result.error);
     } else {

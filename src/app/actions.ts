@@ -1,7 +1,6 @@
 'use server';
 
-import { summarizeChallenge as summarizeChallengeFlow } from '@/ai/flows/summarize-challenge';
-import { CHALLENGE_DESCRIPTION } from '@/lib/maze-config';
+import { summarizeChallenge as summarizeChallengeFlow, SummarizeChallengeInput } from '@/ai/flows/summarize-challenge';
 
 class AiTutorError extends Error {
   constructor(message: string) {
@@ -10,11 +9,9 @@ class AiTutorError extends Error {
   }
 }
 
-export async function getSimpleSummary(): Promise<{summary: string, error?: undefined} | {summary?: undefined, error: string}> {
+export async function getSimpleSummary(input: SummarizeChallengeInput): Promise<{summary: string, error?: undefined} | {summary?: undefined, error: string}> {
   try {
-    const result = await summarizeChallengeFlow({
-      challengeDescription: CHALLENGE_DESCRIPTION,
-    });
+    const result = await summarizeChallengeFlow(input);
     return { summary: result.simpleSummary };
   } catch (error) {
     console.error('Error getting AI summary:', error);

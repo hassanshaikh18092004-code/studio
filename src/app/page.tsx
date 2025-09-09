@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, RefreshCw, Bot } from 'lucide-react';
@@ -9,28 +9,96 @@ import { AiTutor } from '@/components/block-explorers/AiTutor';
 import { CodePalette } from '@/components/block-explorers/CodePalette';
 import { CodeSequence } from '@/components/block-explorers/CodeSequence';
 import { Maze } from '@/components/block-explorers/Maze';
-import { LEVEL_1_MAZE, LEVEL_1_START_STATE, CHALLENGE_DESCRIPTION } from '@/lib/maze-config';
+import { LevelSelect } from '@/components/block-explorers/LevelSelect';
+import { LEVELS } from '@/lib/maze-config';
 import type { Block, BlockType, RobotState, Direction } from '@/lib/types';
 
+// Helper to flatten the sequence for execution
+const flattenSequence = (sequence: Block[]): Omit<Block, 'children'>[] => {
+  const flat: Omit<Block, 'children'>[] = [];
+  for (const block of sequence) {
+    if (block.type === 'repeat' && block.children) {
+      for (let i = 0; i < (block.times || 1); i++) {
+        flat.push(...flattenSequence(block.children));
+      }
+    } else {
+      const { children, ...rest } = block;
+      flat.push(rest);
+    }
+  }
+  return flat;
+};
+
 export default function BlockExplorersPage() {
+  const [levelIndex, setLevelIndex] = useState(0);
   const [sequence, setSequence] = useState<Block[]>([]);
-  const [robotState, setRobotState] = useState<RobotState>(LEVEL_1_START_STATE);
+  const [robotState, setRobotState] = useState<RobotState>(LEVELS[0].startState);
   const [isRunning, setIsRunning] = useState(false);
   const [currentStep, setCurrentStep] = useState<number | null>(null);
   const { toast } = useToast();
 
-  const addBlock = (type: BlockType) => {
+  const currentLevel = useMemo(() => LEVELS[levelIndex], [levelIndex]);
+
+  const reset = useCallback(() => {
+    setIsRunning(false);
+    setCurrentStep(null);
+    setRobotState(currentLevel.startState);
+  }, [currentLevel]);
+  
+  useEffect(() => {
+    setSequence([]);
+    reset();
+  }, [levelIndex, reset]);
+
+  const addBlock = (type: BlockType, parentId?: string) => {
     if (isRunning) return;
     const newBlock: Block = { id: crypto.randomUUID(), type };
-    setSequence(prev => [...prev, newBlock]);
+    if (type === 'repeat') {
+      newBlock.times = 3;
+      newBlock.children = [];
+    }
+
+    if (!parentId) {
+      setSequence(prev => [...prev, newBlock]);
+      return;
+    }
+
+    const addToParent = (blocks: Block[]): Block[] => {
+      return blocks.map(b => {
+        if (b.id === parentId) {
+          if (b.type === 'repeat' && b.children) {
+            return { ...b, children: [...b.children, newBlock] };
+          }
+        }
+        if (b.children) {
+          return { ...b, children: addToParent(b.children) };
+        }
+        return b;
+      });
+    };
+    setSequence(addToParent);
   };
 
   const removeBlock = (id: string) => {
     if (isRunning) return;
-    setSequence(prev => prev.filter(block => block.id !== id));
+
+    const removeFromSequence = (blocks: Block[]): Block[] => {
+      const filtered = blocks.filter(b => b.id !== id);
+      if (filtered.length < blocks.length) return filtered;
+
+      return blocks.map(b => {
+        if (b.children) {
+          return { ...b, children: removeFromSequence(b.children) };
+        }
+        return b;
+      });
+    };
+    setSequence(removeFromSequence);
   };
 
   const moveBlock = (id: string, direction: 'up' | 'down') => {
+    // This is a simplified move for top-level blocks.
+    // A full implementation would need to handle moving in/out of nested structures.
     if (isRunning) return;
     const index = sequence.findIndex(b => b.id === id);
     if (index === -1) return;
@@ -41,24 +109,36 @@ export default function BlockExplorersPage() {
     setSequence(newSequence);
   };
 
-  const reset = useCallback(() => {
-    setIsRunning(false);
-    setCurrentStep(null);
-    setRobotState(LEVEL_1_START_STATE);
-  }, []);
+  const updateBlock = (id: string, updates: Partial<Block>) => {
+    if (isRunning) return;
+    const updateInSequence = (blocks: Block[]): Block[] => {
+      return blocks.map(b => {
+        if (b.id === id) {
+          return { ...b, ...updates };
+        }
+        if (b.children) {
+          return { ...b, children: updateInSequence(b.children) };
+        }
+        return b;
+      });
+    };
+    setSequence(updateInSequence);
+  };
 
   const handleRun = () => {
     if (isRunning || sequence.length === 0) return;
-    setRobotState(LEVEL_1_START_STATE);
+    setRobotState(currentLevel.startState);
     setIsRunning(true);
     setCurrentStep(0);
   };
 
+  const executableSequence = useMemo(() => flattenSequence(sequence), [sequence]);
+
   useEffect(() => {
-    if (!isRunning || currentStep === null || currentStep >= sequence.length) {
+    if (!isRunning || currentStep === null || currentStep >= executableSequence.length) {
       if (isRunning) { // Finished sequence
         const { x, y } = robotState;
-        if (LEVEL_1_MAZE[y]?.[x] !== 'goal') {
+        if (currentLevel.maze[y]?.[x] !== 'goal') {
             toast({
               title: "Almost there!",
               description: "You've completed the sequence, but haven't reached the goal. Try adjusting your blocks.",
@@ -72,7 +152,7 @@ export default function BlockExplorersPage() {
     }
 
     const timeoutId = setTimeout(() => {
-      const block = sequence[currentStep];
+      const block = executableSequence[currentStep];
       let nextState: RobotState = { ...robotState };
 
       if (block.type === 'move') {
@@ -91,7 +171,7 @@ export default function BlockExplorersPage() {
       }
       
       const { x, y } = nextState;
-      if (y < 0 || x < 0 || y >= LEVEL_1_MAZE.length || x >= LEVEL_1_MAZE[y].length || LEVEL_1_MAZE[y][x] === 'wall') {
+      if (y < 0 || x < 0 || y >= currentLevel.maze.length || x >= currentLevel.maze[y].length || currentLevel.maze[y][x] === 'wall') {
         toast({
           title: 'Oops! Hit a wall.',
           description: 'The robot cannot move through walls. Please reset and try again.',
@@ -104,13 +184,17 @@ export default function BlockExplorersPage() {
 
       setRobotState(nextState);
 
-      if (LEVEL_1_MAZE[nextState.y][nextState.x] === 'goal') {
+      if (currentLevel.maze[nextState.y][nextState.x] === 'goal') {
         toast({
           title: 'Congratulations!',
-          description: 'You completed the level!',
+          description: `You completed ${currentLevel.title}!`,
         });
         setIsRunning(false);
         setCurrentStep(null);
+        // Maybe move to next level?
+        if (levelIndex < LEVELS.length - 1) {
+          setTimeout(() => setLevelIndex(i => i + 1), 1000);
+        }
         return;
       }
 
@@ -118,7 +202,7 @@ export default function BlockExplorersPage() {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [isRunning, currentStep, robotState, sequence, toast, reset]);
+  }, [isRunning, currentStep, robotState, executableSequence, toast, reset, currentLevel, levelIndex]);
 
 
   return (
@@ -126,7 +210,7 @@ export default function BlockExplorersPage() {
       <header className="flex items-center flex-shrink-0">
         <Bot className="h-8 w-8 text-primary mr-3" />
         <h1 className="text-2xl lg:text-3xl font-bold font-headline">Block Explorers</h1>
-        <AiTutor />
+        <AiTutor challengeDescription={currentLevel.description} />
       </header>
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 flex-grow min-h-0">
         <div className="lg:col-span-3 min-h-[200px] lg:min-h-0">
@@ -134,21 +218,32 @@ export default function BlockExplorersPage() {
         </div>
         <div className="lg:col-span-4 flex flex-col gap-4 min-h-[300px] lg:min-h-0">
           <CodeSequence 
-            sequence={sequence} 
+            sequence={sequence}
+            addBlock={addBlock}
             removeBlock={removeBlock} 
             moveBlock={moveBlock}
-            currentStep={currentStep}
+            updateBlock={updateBlock}
+            currentStepId={null} // Simplified for now
             isRunning={isRunning}
           />
         </div>
         <div className="lg:col-span-5 flex flex-col gap-4">
           <Card className="flex-grow">
             <CardHeader>
-              <CardTitle>Level 1: The First Step</CardTitle>
-              <CardDescription>{CHALLENGE_DESCRIPTION}</CardDescription>
+              <div className="flex justify-between items-start">
+                <div>
+                    <CardTitle>{currentLevel.title}</CardTitle>
+                    <CardDescription>{currentLevel.description}</CardDescription>
+                </div>
+                <LevelSelect 
+                    currentLevel={levelIndex}
+                    totalLevels={LEVELS.length}
+                    onLevelChange={setLevelIndex}
+                />
+              </div>
             </CardHeader>
             <CardContent className="flex items-center justify-center">
-                <Maze maze={LEVEL_1_MAZE} robotState={robotState} />
+                <Maze maze={currentLevel.maze} robotState={robotState} />
             </CardContent>
           </Card>
           <div className="flex gap-4">
