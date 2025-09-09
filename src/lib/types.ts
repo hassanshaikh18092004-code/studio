@@ -1,4 +1,5 @@
 
+
 // Types for the original Block Explorers maze game
 export type BlockType = 'move' | 'turn-left' | 'turn-right' | 'repeat';
 
@@ -28,13 +29,13 @@ export interface MazeLevel {
 }
 
 
-// Types for the C Language Challenge
+// Types for the C & Python Language Challenges
 export interface CodeBlock {
   id: string;
   code: string;
 }
 
-export interface CLevel {
+export interface CodingLevel {
   title: string;
   description: string;
   codeTemplate: (string | null)[]; // string for code, null for a blank

@@ -3,7 +3,7 @@
 
 import { useDroppable } from '@dnd-kit/core';
 import { cn } from '@/lib/utils';
-import type { CLevel, CodeBlock } from '@/lib/types';
+import type { CodingLevel, CodeBlock } from '@/lib/types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
@@ -36,7 +36,7 @@ function BlankSpace({ id, content }: BlankSpaceProps) {
 }
 
 interface CodeEditorProps {
-  level: CLevel;
+  level: CodingLevel;
   userAnswers: (CodeBlock | null)[];
 }
 
