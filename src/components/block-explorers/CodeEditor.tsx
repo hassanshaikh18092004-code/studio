@@ -17,7 +17,7 @@ function BlankSpace({ id, content }: BlankSpaceProps) {
     <div
       ref={setNodeRef}
       className={cn(
-        "inline-block min-w-[120px] md:min-w-[150px] min-h-[36px] p-1 rounded-md border-2 border-dashed bg-background/50 text-center align-middle transition-colors",
+        "inline-block min-w-[120px] md:min-w-[150px] min-h-[36px] p-1 rounded-md border-2 border-dashed bg-muted text-center align-middle transition-colors",
         isOver ? "border-primary bg-primary/20" : "border-muted-foreground/50",
         content ? "border-solid !border-primary bg-primary/10" : ""
       )}
@@ -55,12 +55,12 @@ export function CodeEditor({ level, userAnswers }: CodeEditorProps) {
   }, [] as { type: 'code' | 'blank'; content: any; key: string }[]);
 
   return (
-    <div className="w-full h-full bg-[#282c34] p-2 sm:p-4 rounded-lg shadow-inner font-mono text-left overflow-auto">
+    <div className="w-full h-full bg-[#f5f5f5] text-black p-2 sm:p-4 rounded-lg border font-mono text-left overflow-auto">
       <pre className="text-xs sm:text-sm whitespace-pre-wrap">
         {codeParts.map(part => {
           if (part.type === 'code') {
             return (
-              <span key={part.key} style={{ color: '#abb2bf' }}>{part.content}</span>
+              <span key={part.key}>{part.content}</span>
             );
           } else {
             const blankIndex = part.content;

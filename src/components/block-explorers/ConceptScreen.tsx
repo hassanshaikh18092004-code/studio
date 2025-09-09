@@ -18,7 +18,7 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
   return (
     <ScrollArea className="h-full">
       <div className="flex items-center justify-center min-h-full p-1">
-        <Card className="w-full max-w-3xl shadow-2xl">
+        <Card className="w-full max-w-3xl">
           <CardHeader className="text-center">
             <div className="flex justify-center items-center mb-4">
               <Lightbulb className="h-8 md:h-10 w-8 md:w-10 text-primary mr-3" />
@@ -34,10 +34,8 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
               {level.concept.example && (
                   <div className="mt-4">
                       <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                      <div className="max-h-[40vh] overflow-y-auto">
-                        <SyntaxHighlighter language={level.title.toLowerCase().includes('python') ? 'python' : 'c'} style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem' }}>
-                            {level.concept.example}
-                        </SyntaxHighlighter>
+                      <div className="max-h-[40vh] overflow-y-auto bg-[#f5f5f5] p-4 rounded-md border text-black">
+                         <pre><code>{level.concept.example}</code></pre>
                       </div>
                   </div>
               )}

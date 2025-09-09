@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
       </header>
       <main className="w-full max-w-md sm:max-w-2xl">
-        <Card className="shadow-xl">
+        <Card>
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Choose Your Path</CardTitle>
             <CardDescription>Select a programming language to begin your learning adventure.</CardDescription>

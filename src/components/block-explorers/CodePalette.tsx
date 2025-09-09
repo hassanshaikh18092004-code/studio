@@ -26,7 +26,7 @@ function DraggableOption({ option, index }: { option: CodeBlock, index: number }
       style={style}
       {...listeners}
       {...attributes}
-      className="p-3 bg-background border rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary flex items-center gap-4"
+      className="p-3 bg-slate-200 border rounded-lg font-mono text-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary flex items-center gap-4"
     >
       <span className='font-bold text-lg text-primary'>{label}</span>
       <code>{option.code}</code>
@@ -36,7 +36,7 @@ function DraggableOption({ option, index }: { option: CodeBlock, index: number }
 
 export function CodePalette({ options }: CodePaletteProps) {
   return (
-    <Card className="h-full shadow-lg flex flex-col">
+    <Card className="h-full flex flex-col">
       <CardHeader className='pb-2'>
         <CardTitle>Code Snippets</CardTitle>
         <p className="text-sm text-muted-foreground pt-1">Drag a snippet to a blank space in the editor.</p>
