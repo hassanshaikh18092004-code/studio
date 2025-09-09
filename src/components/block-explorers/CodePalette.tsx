@@ -1,42 +1,51 @@
+
 "use client"
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Move, RotateCcw, RotateCw, RefreshCcw } from 'lucide-react';
-import type { BlockType } from '@/lib/types';
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import type { CodeBlock } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 interface CodePaletteProps {
-  addBlock: (type: BlockType) => void;
+  options: CodeBlock[];
 }
 
-const availableBlocks: { type: BlockType; label: string; icon: React.ReactNode }[] = [
-  { type: 'move', label: 'Move Forward', icon: <Move className="mr-2 h-4 w-4" /> },
-  { type: 'turn-left', label: 'Turn Left', icon: <RotateCcw className="mr-2 h-4 w-4" /> },
-  { type: 'turn-right', label: 'Turn Right', icon: <RotateCw className="mr-2 h-4 w-4" /> },
-  { type: 'repeat', label: 'Repeat', icon: <RefreshCcw className="mr-2 h-4 w-4" /> },
-];
+function DraggableOption({ option }: { option: CodeBlock }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: option.id,
+  });
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  };
 
-export function CodePalette({ addBlock }: CodePaletteProps) {
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="p-3 bg-secondary rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary"
+    >
+      {option.code}
+    </div>
+  );
+}
+
+export function CodePalette({ options }: CodePaletteProps) {
   return (
     <Card className="h-full shadow-lg">
       <CardHeader>
-        <CardTitle>Code Blocks</CardTitle>
+        <CardTitle>Code Snippets</CardTitle>
+        <CardContent className='pt-4 px-0'>
+          <p className="text-sm text-muted-foreground pb-4">Drag a snippet to a blank space in the editor.</p>
+          <div className="flex flex-col gap-3">
+            {options.map((option) => (
+              <DraggableOption key={option.id} option={option} />
+            ))}
+          </div>
+        </CardContent>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-col gap-3">
-          {availableBlocks.map((block) => (
-            <Button
-              key={block.type}
-              variant="secondary"
-              className="justify-start text-base py-6 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-px transition-all"
-              onClick={() => addBlock(block.type)}
-            >
-              {block.icon}
-              {block.label}
-            </Button>
-          ))}
-        </div>
-      </CardContent>
     </Card>
   );
 }
