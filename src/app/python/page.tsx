@@ -25,8 +25,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export default function PythonChallengePage() {
   const [levelIndex, setLevelIndex] = useState(0);
@@ -186,10 +184,8 @@ export default function PythonChallengePage() {
           {currentLevel.concept.example && (
                 <div className="mt-2">
                     <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                    <div className="max-h-[50vh] overflow-y-auto">
-                        <SyntaxHighlighter language="python" style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
-                            {currentLevel.concept.example}
-                        </SyntaxHighlighter>
+                    <div className="max-h-[50vh] overflow-y-auto bg-[#f5f5f5] p-4 rounded-md border text-black">
+                      <pre><code>{currentLevel.concept.example}</code></pre>
                     </div>
                 </div>
             )}

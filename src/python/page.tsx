@@ -25,8 +25,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export default function PythonChallengePage() {
   const [levelIndex, setLevelIndex] = useState(0);

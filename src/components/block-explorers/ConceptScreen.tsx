@@ -5,8 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Lightbulb, Puzzle } from 'lucide-react';
 import type { CodingLevel } from '@/lib/types';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface ConceptScreenProps {
