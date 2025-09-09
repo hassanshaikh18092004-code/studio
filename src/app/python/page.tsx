@@ -18,11 +18,21 @@ import {
   closestCenter,
   DragEndEvent,
 } from '@dnd-kit/core';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export default function PythonChallengePage() {
   const [levelIndex, setLevelIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(CodeBlockType | null)[]>([]);
   const [gameState, setGameState] = useState<'concept' | 'challenge'>('concept');
+  const [isConceptVisible, setIsConceptVisible] = useState(false);
   const { toast } = useToast();
 
   const currentLevel = useMemo(() => PYTHON_LEVELS[levelIndex], [levelIndex]);
@@ -131,6 +141,10 @@ export default function PythonChallengePage() {
                                 <CardTitle>{currentLevel.title}</CardTitle>
                                 <CardDescription>{currentLevel.description}</CardDescription>
                             </div>
+                            <Button variant="outline" size="sm" onClick={() => setIsConceptVisible(true)}>
+                                <Lightbulb className="mr-2 h-4 w-4" />
+                                Hint
+                            </Button>
                         </div>
                     </CardHeader>
                     <CardContent className="flex-grow flex items-center justify-center">
@@ -157,6 +171,28 @@ export default function PythonChallengePage() {
           </main>
         )}
       </div>
+
+      <Dialog open={isConceptVisible} onOpenChange={setIsConceptVisible}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-2xl">
+                <Lightbulb className="h-6 w-6 text-primary" />
+                {currentLevel.concept.title}
+            </DialogTitle>
+            <DialogDescription className="pt-2 text-base">
+              {currentLevel.concept.explanation}
+            </DialogDescription>
+          </DialogHeader>
+          {currentLevel.concept.example && (
+                <div className="mt-2">
+                    <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
+                    <SyntaxHighlighter language="python" style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
+                        {currentLevel.concept.example}
+                    </SyntaxHighlighter>
+                </div>
+            )}
+        </DialogContent>
+      </Dialog>
     </DndContext>
   );
 }
