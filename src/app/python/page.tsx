@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Play, RefreshCw, Bot, Home } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { AiTutor } from '@/components/block-explorers/AiTutor';
 import { CodePalette } from '@/components/block-explorers/CodePalette';
 import { CodeEditor } from '@/components/block-explorers/CodeEditor';
 import { LevelSelect } from '@/components/block-explorers/LevelSelect';
@@ -16,10 +15,6 @@ import type { CodeBlock as CodeBlockType } from '@/lib/types';
 import {
   DndContext,
   closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
   DragEndEvent,
 } from '@dnd-kit/core';
 
@@ -86,7 +81,7 @@ export default function PythonChallengePage() {
     } else {
       toast({
         title: 'Not quite...',
-        description: "The code isn't correct. Keep trying! You can ask the AI Tutor for a hint.",
+        description: "The code isn't correct. Keep trying!",
         variant: 'destructive',
       });
     }
@@ -103,7 +98,6 @@ export default function PythonChallengePage() {
           </Link>
           <Bot className="h-8 w-8 text-primary mr-3" />
           <h1 className="text-2xl lg:text-3xl font-bold font-headline">Python Language Challenge</h1>
-          <AiTutor challengeDescription={currentLevel.description} />
         </header>
         <main className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 flex-grow min-h-0">
           <div className="lg:col-span-4 min-h-[200px] lg:min-h-0">
