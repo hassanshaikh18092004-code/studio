@@ -1,4 +1,3 @@
-
 import type { CodingLevel } from '@/lib/types';
 
 export const PYTHON_LEVELS: CodingLevel[] = [
@@ -16,6 +15,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
       { id: 'py1-opt1', code: 'print("Hello, World!")' },
       { id: 'py1-opt2', code: 'printf("Hello, World!")' },
       { id: 'py1-opt3', code: 'console.log("Hello, World!")' },
+      { id: 'py1-opt4', code: 'cout << "Hello, World!"' },
     ],
     solution: ['py1-opt1'],
     blanks: 1,
@@ -35,6 +35,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
       { id: 'py2-opt1', code: 'let message = "Python is fun"' },
       { id: 'py2-opt2', code: 'message = "Python is fun"' },
       { id: 'py2-opt3', code: 'string message = "Python is fun"' },
+      { id: 'py2-opt4', code: 'var message = "Python is fun"' },
     ],
     solution: ['py2-opt2'],
     blanks: 1,
@@ -54,6 +55,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
       { id: 'py3-opt1', code: 'for i in range(5):' },
       { id: 'py3-opt2', code: 'for (i = 0; i < 5; i++):' },
       { id: 'py3-opt3', code: 'loop i from 0 to 4:' },
+      { id: 'py3-opt4', code: 'for i in 5:' },
     ],
     solution: ['py3-opt1'],
     blanks: 1,
@@ -98,6 +100,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
       { id: 'py5-opt1', code: 'run greet()' },
       { id: 'py5-opt2', code: 'greet()' },
       { id: 'py5-opt3', code: 'call greet' },
+      { id: 'py5-opt4', code: 'greet' },
     ],
     solution: ['py5-opt2'],
     blanks: 1,
@@ -119,6 +122,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
         { id: 'py6-opt1', code: 'say_hello("Alex")' },
         { id: 'py6-opt2', code: 'say_hello(Alex)' },
         { id: 'py6-opt3', code: 'call say_hello("Alex")' },
+        { id: 'py6-opt4', code: 'say_hello "Alex"' },
     ],
     solution: ['py6-opt1'],
     blanks: 1,
@@ -142,6 +146,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
         { id: 'py7-opt1', code: 'return a + b' },
         { id: 'py7-opt2', code: 'print(a + b)' },
         { id: 'py7-opt3', code: 'a + b' },
+        { id: 'py7-opt4', code: 'yield a + b' },
     ],
     solution: ['py7-opt1'],
     blanks: 1,
@@ -186,6 +191,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
         { id: 'py9-opt1', code: 'fruits[1]' },
         { id: 'py9-opt2', code: 'fruits[2]' },
         { id: 'py9-opt3', code: 'fruits.get(1)' },
+        { id: 'py9-opt4', code: 'fruits.1' },
     ],
     solution: ['py9-opt1'],
     blanks: 1,
@@ -210,6 +216,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
         { id: 'py10-opt1', code: 'person["city"]' },
         { id: 'py10-opt2', code: 'person.city' },
         { id: 'py10-opt3', code: 'person[1]' },
+        { id: 'py10-opt4', code: 'person.get("city")' },
     ],
     solution: ['py10-opt1'],
     blanks: 1,

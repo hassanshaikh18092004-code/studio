@@ -1,4 +1,3 @@
-
 import type { CodingLevel } from '@/lib/types';
 
 export const C_LEVELS: CodingLevel[] = [
@@ -23,6 +22,7 @@ export const C_LEVELS: CodingLevel[] = [
       { id: 'c1-opt1', code: 'printf("Hello, World!");' },
       { id: 'c1-opt2', code: 'cout << "Hello, World!";' },
       { id: 'c1-opt3', code: 'print("Hello, World!");' },
+      { id: 'c1-opt4', code: 'System.out.println("Hello, World!");' },
     ],
     solution: ['c1-opt1'],
     blanks: 1,
@@ -49,6 +49,7 @@ export const C_LEVELS: CodingLevel[] = [
       { id: 'c2-opt1', code: 'string age = "25"' },
       { id: 'c2-opt2', code: 'int age = 25' },
       { id: 'c2-opt3', code: 'let age = 25' },
+      { id: 'c2-opt4', code: 'var age = 25' },
     ],
     solution: ['c2-opt2'],
     blanks: 1,
@@ -76,6 +77,7 @@ export const C_LEVELS: CodingLevel[] = [
       { id: 'c3-opt1', code: 'for (int i = 0; i < 5; i++)' },
       { id: 'c3-opt2', code: 'loop(5)' },
       { id: 'c3-opt3', code: 'for i in range(5)' },
+      { id: 'c3-opt4', code: 'for (int i=0; i < 5)' },
     ],
     solution: ['c3-opt1'],
     blanks: 1,
@@ -138,6 +140,7 @@ export const C_LEVELS: CodingLevel[] = [
       { id: 'c5-opt1', code: 'run greet()' },
       { id: 'c5-opt2', code: 'greet()' },
       { id: 'c5-opt3', code: 'call greet' },
+      { id: 'c5-opt4', code: 'greet' },
     ],
     solution: ['c5-opt2'],
     blanks: 1,
@@ -167,6 +170,7 @@ export const C_LEVELS: CodingLevel[] = [
         { id: 'c6-opt1', code: 'add(5, 10)' },
         { id: 'c6-opt2', code: 'add(5 10)' },
         { id: 'c6-opt3', code: 'add 5, 10' },
+        { id: 'c6-opt4', code: 'add{5, 10}' },
     ],
     solution: ['c6-opt1'],
     blanks: 1,
@@ -197,6 +201,7 @@ export const C_LEVELS: CodingLevel[] = [
         { id: 'c7-opt1', code: 'return a * b' },
         { id: 'c7-opt2', code: 'print(a * b)' },
         { id: 'c7-opt3', code: 'a * b' },
+        { id: 'c7-opt4', code: 'yield a * b' },
     ],
     solution: ['c7-opt1'],
     blanks: 1,
@@ -255,6 +260,7 @@ export const C_LEVELS: CodingLevel[] = [
         { id: 'c9-opt1', code: 'numbers[1]' },
         { id: 'c9-opt2', code: 'numbers[2]' },
         { id: 'c9-opt3', code: 'numbers.get(1)' },
+        { id: 'c9-opt4', code: 'numbers.1' },
     ],
     solution: ['c9-opt1'],
     blanks: 1,
@@ -282,6 +288,7 @@ export const C_LEVELS: CodingLevel[] = [
         { id: 'c10-opt1', code: 'int *ptr' },
         { id: 'c10-opt2', code: 'pointer ptr' },
         { id: 'c10-opt3', code: 'int ptr' },
+        { id: 'c10-opt4', code: '&ptr' },
     ],
     solution: ['c10-opt1'],
     blanks: 1,
