@@ -122,37 +122,37 @@ export default function CChallengePage() {
             />
           </main>
         ) : (
-          <main className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 flex-grow min-h-0">
-            <div className="lg:col-span-4 min-h-[200px] lg:min-h-0">
-              <CodePalette options={currentLevel.options} />
+          <main className="flex flex-col gap-4 lg:gap-6 flex-grow min-h-0">
+            <div className="flex flex-col gap-4 flex-grow min-h-0">
+                <Card className="flex-grow flex flex-col">
+                    <CardHeader>
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <CardTitle>{currentLevel.title}</CardTitle>
+                                <CardDescription>{currentLevel.description}</CardDescription>
+                            </div>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="flex-grow flex items-center justify-center">
+                        <CodeEditor
+                            level={currentLevel}
+                            userAnswers={userAnswers}
+                        />
+                    </CardContent>
+                </Card>
+                <div className="flex gap-4">
+                    <Button onClick={checkAnswer} className="w-full text-lg py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                        <Play className="mr-2 h-5 w-5" />
+                        Check Answer
+                    </Button>
+                    <Button onClick={resetLevel} variant="outline" className="w-full text-lg py-6">
+                        <RefreshCw className="mr-2 h-5 w-5" />
+                        Reset
+                    </Button>
+                </div>
             </div>
-            <div className="lg:col-span-8 flex flex-col gap-4">
-              <Card className="flex-grow flex flex-col">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                        <CardTitle>{currentLevel.title}</CardTitle>
-                        <CardDescription>{currentLevel.description}</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow flex items-center justify-center">
-                    <CodeEditor 
-                      level={currentLevel}
-                      userAnswers={userAnswers}
-                    />
-                </CardContent>
-              </Card>
-              <div className="flex gap-4">
-                  <Button onClick={checkAnswer} className="w-full text-lg py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-                      <Play className="mr-2 h-5 w-5" />
-                      Check Answer
-                  </Button>
-                  <Button onClick={resetLevel} variant="outline" className="w-full text-lg py-6">
-                      <RefreshCw className="mr-2 h-5 w-5" />
-                      Reset
-                  </Button>
-              </div>
+            <div className="flex-shrink-0">
+              <CodePalette options={currentLevel.options} />
             </div>
           </main>
         )}
@@ -160,3 +160,4 @@ export default function CChallengePage() {
     </DndContext>
   );
 }
+
