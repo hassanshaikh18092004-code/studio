@@ -41,6 +41,7 @@ export interface CodingLevel {
   concept: {
     title: string;
     explanation: string;
+    example?: string;
   };
   codeTemplate: (string | null)[]; // string for code, null for a blank
   options: CodeBlock[];

@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Lightbulb, Puzzle } from 'lucide-react';
 import type { CodingLevel } from '@/lib/types';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface ConceptScreenProps {
   level: CodingLevel;
@@ -27,6 +29,14 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
             <p className="text-lg text-foreground leading-relaxed">
               {level.concept.explanation}
             </p>
+            {level.concept.example && (
+                <div className="mt-4">
+                    <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
+                    <SyntaxHighlighter language={level.title.toLowerCase().includes('python') ? 'python' : 'c'} style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
+                        {level.concept.example}
+                    </SyntaxHighlighter>
+                </div>
+            )}
           </div>
           <Button onClick={onStart} className="w-full text-xl py-7">
             <Puzzle className="mr-2 h-6 w-6" />

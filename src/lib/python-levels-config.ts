@@ -1,3 +1,4 @@
+
 import type { CodingLevel } from '@/lib/types';
 
 export const PYTHON_LEVELS: CodingLevel[] = [
@@ -7,6 +8,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
       title: 'Printing Output',
       explanation: 'In Python, the `print()` function is used to display text or variables in the console. It\'s the most common way to see your code\'s output. The content to be printed goes inside the parentheses.',
+      example: 'print("Any text you want to display")'
     },
     codeTemplate: [
       null,
@@ -26,6 +28,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Variables',
         explanation: 'Variables are used to store information that can be used and changed in a program. In Python, you create a variable by giving it a name and assigning it a value using the `=` sign.',
+        example: 'my_number = 42\ntemperature = 21.5\nuser_name = "Alice"'
     },
     codeTemplate: [
       null,
@@ -46,6 +49,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'For Loops with Range',
         explanation: 'A `for` loop iterates over a sequence. The `range()` function is powerful; `range(start, stop, step)` generates numbers from a start value, up to a stop value, incrementing by a step value.',
+        example: '# This will print 0, 1, 2, 3, 4\nfor i in range(5):\n    print(i)'
     },
     codeTemplate: [
       null,
@@ -66,6 +70,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'If-Else and Modulo',
         explanation: '`if-else` statements make decisions. The modulo operator (`%`) is perfect for checking for evenness. `number % 2 == 0` is true if `number` is even, because there is no remainder when dividing by 2.',
+        example: 'num = 10\nif num > 5:\n    print("Number is greater than 5")\nelse:\n    print("Number is 5 or less")'
     },
     codeTemplate: [
       'num = 7',
@@ -91,6 +96,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Functions',
         explanation: 'Functions are defined using the `def` keyword. They bundle up code that you can run simply by "calling" the function name. This makes code reusable and organized.',
+        example: '# Defining the function\ndef say_hello():\n    print("Hello!")\n\n# Calling the function\nsay_hello()'
     },
     codeTemplate: [
       'def greet():',
@@ -113,6 +119,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Function Parameters',
         explanation: 'You can pass data into a function through parameters (also called arguments). These are variables listed inside the parentheses in the function definition. When you call the function, you provide values for these parameters.',
+        example: '# This function takes one parameter\ndef print_message(message):\n    print(message)\n\n# Call it and pass a string\nprint_message("This is a test!")'
     },
     codeTemplate: [
         'def calculate_area(width, height):',
@@ -135,6 +142,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Return Values with Booleans',
         explanation: 'Functions can return boolean values (`True` or `False`). This is very common for functions that check if a condition is met. The result of a comparison (like `age >= 18`) is already a boolean value, so you can return it directly!',
+        example: '# This function returns the sum of two numbers\ndef add(a, b):\n    return a + b\n\n# Store the returned value in a variable\nsum_result = add(5, 3) # sum_result is now 8'
     },
     codeTemplate: [
         'def can_vote(age):',
@@ -159,6 +167,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'While Loops for Goal-Seeking',
         explanation: 'A `while` loop is perfect for repeating an action until a specific goal is reached. You can use a condition to check if you have reached the goal in each iteration.',
+        example: 'count = 0\nwhile count < 3:\n    print("Looping...")\n    count += 1 # It is crucial to change the condition variable'
     },
     codeTemplate: [
         'total = 0',
@@ -185,6 +194,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Looping Through Lists',
         explanation: 'You can combine a `for` loop with an `if` statement to search for an item in a list. The loop goes through each item one-by-one, and the `if` statement checks if the current item is the one you\'re looking for.',
+        example: 'fruits = ["apple", "banana", "cherry"]\nfor fruit in fruits:\n    print(fruit)'
     },
     codeTemplate: [
         'names = ["Alice", "Bob", "Charlie", "David"]',
@@ -209,6 +219,7 @@ export const PYTHON_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Updating Dictionaries',
         explanation: 'Dictionaries are mutable, meaning you can change them. To update the value for a specific key, you can access it using square brackets and assign a new value to it.',
+        example: 'user = {"name": "Bob", "age": 30}\n\n# Access a value\nprint(user["name"]) # Prints "Bob"\n\n# Update a value\nuser["age"] = 31'
     },
     codeTemplate: [
         'person = {',

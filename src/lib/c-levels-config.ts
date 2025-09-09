@@ -1,3 +1,4 @@
+
 import type { CodingLevel } from '@/lib/types';
 
 export const C_LEVELS: CodingLevel[] = [
@@ -7,6 +8,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
       title: 'Printing Output',
       explanation: 'In C, the `printf()` function is used to print text to the console. It\'s a fundamental way to see the result of your code. The text you want to print goes inside the parentheses and double quotes.',
+      example: 'printf("Any text you want to display");'
     },
     codeTemplate: [
       '#include <stdio.h>',
@@ -33,6 +35,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Variables',
         explanation: 'Variables are containers for storing data values. In C, you must declare the type of the variable (like `int` for integers) before you use it. You can then assign a value to it using the `=` operator.',
+        example: 'int myNumber = 42;\nfloat temperature = 21.5;\nchar initial = \'J\';'
     },
     codeTemplate: [
       '#include <stdio.h>',
@@ -60,6 +63,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
       title: 'For Loops',
       explanation: 'A `for` loop is used to repeat a block of code a specific number of times. It has three parts: initialization (runs once at the start), condition (checked before each run), and increment (runs after each run).',
+      example: 'for (int i = 0; i < 5; i++) {\n    // This code runs 5 times\n    printf("%d\\n", i);\n}'
     },
     codeTemplate: [
       '#include <stdio.h>',
@@ -88,6 +92,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'If-Else Conditionals',
         explanation: '`if-else` statements allow your code to make decisions. The code inside the `if` block runs if a condition is true. Pay close attention to comparison operators like `>` (greater than) and `>=` (greater than or equal to).',
+        example: 'int num = 10;\nif (num > 5) {\n    printf("Number is greater than 5");\n} else {\n    printf("Number is 5 or less");\n}'
     },
     codeTemplate: [
       '#include <stdio.h>',
@@ -119,6 +124,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Functions',
         explanation: 'Functions are named blocks of code that perform a specific task. You can "call" a function to execute its code. This helps organize your program and avoids repeating code.',
+        example: '// Defining the function\nvoid sayHello() {\n    printf("Hello!");\n}\n\n// Calling the function\nsayHello();'
     },
     codeTemplate: [
       '#include <stdio.h>',
@@ -149,6 +155,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Function Parameters',
         explanation: 'Parameters are like special variables for a function. They allow you to pass data into the function when you call it. The function can then use this data to perform its task.',
+        example: '// This function takes one integer parameter\nvoid printNumber(int num) {\n    printf("The number is %d", num);\n}\n\n// Call it and pass the number 10\nprintNumber(10);'
     },
     codeTemplate: [
         '#include <stdio.h>',
@@ -179,6 +186,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Return Values',
         explanation: 'A function can send a value back to the code that called it using the `return` keyword. This lets you use the result of a function\'s calculation in other parts of your code.',
+        example: '// This function returns the sum of two numbers\nint add(int a, int b) {\n    return a + b;\n}\n\n// Store the returned value in a variable\nint sum = add(5, 3); // sum is now 8'
     },
     codeTemplate: [
         '#include <stdio.h>',
@@ -214,6 +222,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'While Loops',
         explanation: 'A `while` loop repeatedly executes a block of code as long as a given condition remains true. It\'s useful when you don\'t know exactly how many times you need to loop.',
+        example: 'int count = 0;\nwhile (count < 3) {\n    printf("Looping...\\n");\n    count++; // It is crucial to change the condition variable inside the loop\n}'
     },
     codeTemplate: [
         '#include <stdio.h>',
@@ -244,6 +253,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Arrays',
         explanation: 'An array is a collection of similar data types. You access elements using an index, starting from 0. To get the last element, you can use `array_size - 1`.',
+        example: 'int scores[] = {88, 92, 75};\n\n// Access the first element (index 0)\nint first_score = scores[0];'
     },
     codeTemplate: [
         '#include <stdio.h>',
@@ -272,6 +282,7 @@ export const C_LEVELS: CodingLevel[] = [
     concept: {
         title: 'Pointers with Functions',
         explanation: 'By passing a pointer (a memory address) to a function, the function can directly change the value of the variable at that address. This is a powerful way for functions to have lasting effects on your program\'s data.',
+        example: '// The `*p_value` refers to the variable at the memory address\nvoid add_one(int *p_value) {\n    (*p_value)++; // Add one to the original variable\n}\n\nint my_num = 5;\nadd_one(&my_num); // Pass the address of my_num\n// my_num is now 6'
     },
     codeTemplate: [
         '#include <stdio.h>',
