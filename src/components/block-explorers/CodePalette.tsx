@@ -25,7 +25,7 @@ function DraggableOption({ option }: { option: CodeBlock }) {
       style={style}
       {...listeners}
       {...attributes}
-      className="p-3 bg-secondary rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary"
+      className="p-3 bg-background border rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary"
     >
       {option.code}
     </div>
