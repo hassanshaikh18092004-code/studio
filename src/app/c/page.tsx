@@ -126,7 +126,7 @@ export default function CChallengePage() {
               </CardContent>
             </Card>
             <div className="flex gap-4">
-                <Button onClick={checkAnswer} className="w-full text-lg py-6 bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button onClick={checkAnswer} className="w-full text-lg py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
                     <Play className="mr-2 h-5 w-5" />
                     Check Answer
                 </Button>

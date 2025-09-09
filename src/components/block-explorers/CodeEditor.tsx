@@ -21,11 +21,11 @@ function BlankSpace({ id, content }: BlankSpaceProps) {
       className={cn(
         "inline-block min-w-[150px] min-h-[36px] p-1 rounded-md border-2 border-dashed bg-background/50 text-center align-middle",
         isOver ? "border-primary bg-primary/20" : "border-muted-foreground/50",
-        content ? "border-solid !border-accent" : ""
+        content ? "border-solid !border-secondary" : ""
       )}
     >
       {content ? (
-        <span className="font-mono text-sm p-1 bg-accent/20 rounded-sm">
+        <span className="font-mono text-sm p-1 bg-secondary/20 rounded-sm">
           {content.code}
         </span>
       ) : (
