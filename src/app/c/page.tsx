@@ -106,16 +106,16 @@ export default function CChallengePage() {
 
   return (
     <DndContext onDragEnd={handleDrop} collisionDetection={closestCenter}>
-      <div className="flex flex-col h-screen bg-background text-foreground font-body p-4 lg:p-6 gap-4 lg:gap-6 relative">
-      <header className="flex items-center justify-between flex-shrink-0">
+      <div className="flex flex-col h-screen bg-background text-foreground font-body p-4 lg:p-6 gap-4 lg:gap-6">
+        <header className="flex items-center justify-between flex-shrink-0">
           <div className="flex items-center">
             <Link href="/" passHref>
-              <Button variant="outline" size="icon" className="mr-4">
+              <Button variant="outline" size="icon" className="mr-2 md:mr-4">
                 <Home className="h-4 w-4" />
               </Button>
             </Link>
-            <Bot className="h-8 w-8 text-primary mr-3" />
-            <h1 className="text-2xl lg:text-3xl font-bold font-headline">C Language Challenge</h1>
+            <Bot className="h-8 w-8 text-primary mr-2 md:mr-3" />
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-headline truncate">C Challenge</h1>
           </div>
           <LevelSelect 
             currentLevel={levelIndex}
@@ -132,14 +132,14 @@ export default function CChallengePage() {
             />
           </main>
         ) : (
-          <main className="flex flex-col gap-4 lg:gap-6 flex-grow min-h-0">
+          <main className="grid lg:grid-cols-2 gap-4 lg:gap-6 flex-grow min-h-0">
             <div className="flex flex-col gap-4 flex-grow min-h-0">
                 <Card className="flex-grow flex flex-col">
                     <CardHeader>
-                        <div className="flex justify-between items-start">
+                        <div className="flex justify-between items-start gap-2">
                             <div>
-                                <CardTitle>{currentLevel.title}</CardTitle>
-                                <CardDescription>{currentLevel.description}</CardDescription>
+                                <CardTitle className="text-lg lg:text-xl">{currentLevel.title}</CardTitle>
+                                <CardDescription className="text-sm lg:text-base">{currentLevel.description}</CardDescription>
                             </div>
                             <Button variant="outline" size="sm" onClick={() => setIsConceptVisible(true)}>
                                 <Lightbulb className="mr-2 h-4 w-4" />
@@ -147,15 +147,15 @@ export default function CChallengePage() {
                             </Button>
                         </div>
                     </CardHeader>
-                    <CardContent className="flex-grow flex items-center justify-center">
+                    <CardContent className="flex-grow flex items-center justify-center p-2 sm:p-6">
                         <CodeEditor
                             level={currentLevel}
                             userAnswers={userAnswers}
                         />
                     </CardContent>
                 </Card>
-                <div className="flex gap-4">
-                    <Button onClick={checkAnswer} className="w-full text-lg py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                <div className="flex flex-col sm:flex-row gap-4">
+                    <Button onClick={checkAnswer} className="w-full text-lg py-6">
                         <Play className="mr-2 h-5 w-5" />
                         Check Answer
                     </Button>
@@ -165,7 +165,7 @@ export default function CChallengePage() {
                     </Button>
                 </div>
             </div>
-            <div className="flex-shrink-0">
+            <div className="lg:h-full flex flex-col">
               <CodePalette options={currentLevel.options} />
             </div>
           </main>
@@ -186,9 +186,11 @@ export default function CChallengePage() {
           {currentLevel.concept.example && (
                 <div className="mt-2">
                     <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                    <SyntaxHighlighter language="c" style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
-                        {currentLevel.concept.example}
-                    </SyntaxHighlighter>
+                    <div className="max-h-[50vh] overflow-y-auto">
+                      <SyntaxHighlighter language="c" style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
+                          {currentLevel.concept.example}
+                      </SyntaxHighlighter>
+                    </div>
                 </div>
             )}
         </DialogContent>

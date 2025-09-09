@@ -7,6 +7,7 @@ import { Lightbulb, Puzzle } from 'lucide-react';
 import type { CodingLevel } from '@/lib/types';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface ConceptScreenProps {
   level: CodingLevel;
@@ -15,35 +16,39 @@ interface ConceptScreenProps {
 
 export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
   return (
-    <div className="flex items-center justify-center h-full">
-      <Card className="w-full max-w-3xl shadow-2xl">
-        <CardHeader className="text-center">
-          <div className="flex justify-center items-center mb-4">
-            <Lightbulb className="h-10 w-10 text-primary mr-3" />
-            <CardTitle className="text-3xl font-bold">{level.concept.title}</CardTitle>
-          </div>
-          <CardDescription className="text-lg">Level {level.title.split(':')[0].replace('Level ','')} - Let's learn a new concept!</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-muted/50 p-6 rounded-lg mb-6">
-            <p className="text-lg text-foreground leading-relaxed">
-              {level.concept.explanation}
-            </p>
-            {level.concept.example && (
-                <div className="mt-4">
-                    <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                    <SyntaxHighlighter language={level.title.toLowerCase().includes('python') ? 'python' : 'c'} style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem' }}>
-                        {level.concept.example}
-                    </SyntaxHighlighter>
-                </div>
-            )}
-          </div>
-          <Button onClick={onStart} className="w-full text-xl py-7">
-            <Puzzle className="mr-2 h-6 w-6" />
-            Start Puzzle
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+    <ScrollArea className="h-full">
+      <div className="flex items-center justify-center min-h-full p-1">
+        <Card className="w-full max-w-3xl shadow-2xl">
+          <CardHeader className="text-center">
+            <div className="flex justify-center items-center mb-4">
+              <Lightbulb className="h-8 md:h-10 w-8 md:w-10 text-primary mr-3" />
+              <CardTitle className="text-2xl md:text-3xl font-bold">{level.concept.title}</CardTitle>
+            </div>
+            <CardDescription className="text-base md:text-lg">Level {level.title.split(':')[0].replace('Level ','')} - Let's learn a new concept!</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-muted/50 p-4 md:p-6 rounded-lg mb-6">
+              <p className="text-base md:text-lg text-foreground leading-relaxed">
+                {level.concept.explanation}
+              </p>
+              {level.concept.example && (
+                  <div className="mt-4">
+                      <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
+                      <div className="max-h-[40vh] overflow-y-auto">
+                        <SyntaxHighlighter language={level.title.toLowerCase().includes('python') ? 'python' : 'c'} style={atomOneDark} customStyle={{ padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem' }}>
+                            {level.concept.example}
+                        </SyntaxHighlighter>
+                      </div>
+                  </div>
+              )}
+            </div>
+            <Button onClick={onStart} className="w-full text-xl py-7">
+              <Puzzle className="mr-2 h-6 w-6" />
+              Start Puzzle
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </ScrollArea>
   );
 }

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import type { CodeBlock } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface CodePaletteProps {
   options: CodeBlock[];
@@ -26,7 +26,7 @@ function DraggableOption({ option, index }: { option: CodeBlock, index: number }
       style={style}
       {...listeners}
       {...attributes}
-      className="flex-1 p-3 bg-background border rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary flex items-center gap-4"
+      className="p-3 bg-background border rounded-lg font-mono text-sm shadow-sm cursor-grab active:cursor-grabbing active:shadow-md active:ring-2 active:ring-primary flex items-center gap-4"
     >
       <span className='font-bold text-lg text-primary'>{label}</span>
       <code>{option.code}</code>
@@ -36,18 +36,20 @@ function DraggableOption({ option, index }: { option: CodeBlock, index: number }
 
 export function CodePalette({ options }: CodePaletteProps) {
   return (
-    <Card className="h-full shadow-lg">
+    <Card className="h-full shadow-lg flex flex-col">
       <CardHeader className='pb-2'>
         <CardTitle>Code Snippets</CardTitle>
         <p className="text-sm text-muted-foreground pt-1">Drag a snippet to a blank space in the editor.</p>
       </CardHeader>
-      <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <CardContent className="flex-grow min-h-0">
+        <ScrollArea className="h-full pr-4 -mr-4">
+          <div className="grid grid-cols-1 gap-3">
             {options.map((option, index) => (
               <DraggableOption key={option.id} option={option} index={index} />
             ))}
           </div>
-        </CardContent>
+        </ScrollArea>
+      </CardContent>
     </Card>
   );
 }

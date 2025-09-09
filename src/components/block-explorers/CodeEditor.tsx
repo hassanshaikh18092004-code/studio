@@ -4,8 +4,6 @@
 import { useDroppable } from '@dnd-kit/core';
 import { cn } from '@/lib/utils';
 import type { CodingLevel, CodeBlock } from '@/lib/types';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface BlankSpaceProps {
   id: string;
@@ -19,13 +17,13 @@ function BlankSpace({ id, content }: BlankSpaceProps) {
     <div
       ref={setNodeRef}
       className={cn(
-        "inline-block min-w-[150px] min-h-[36px] p-1 rounded-md border-2 border-dashed bg-background/50 text-center align-middle",
+        "inline-block min-w-[120px] md:min-w-[150px] min-h-[36px] p-1 rounded-md border-2 border-dashed bg-background/50 text-center align-middle transition-colors",
         isOver ? "border-primary bg-primary/20" : "border-muted-foreground/50",
-        content ? "border-solid !border-secondary" : ""
+        content ? "border-solid !border-primary bg-primary/10" : ""
       )}
     >
       {content ? (
-        <span className="font-mono text-sm p-1 bg-secondary/20 rounded-sm">
+        <span className="font-mono text-xs md:text-sm p-1 rounded-sm text-primary-foreground bg-primary/80">
           {content.code}
         </span>
       ) : (
@@ -57,8 +55,8 @@ export function CodeEditor({ level, userAnswers }: CodeEditorProps) {
   }, [] as { type: 'code' | 'blank'; content: any; key: string }[]);
 
   return (
-    <div className="w-full h-full bg-[#282c34] p-4 rounded-lg shadow-inner font-mono text-left">
-      <pre className="text-sm whitespace-pre-wrap">
+    <div className="w-full h-full bg-[#282c34] p-2 sm:p-4 rounded-lg shadow-inner font-mono text-left overflow-auto">
+      <pre className="text-xs sm:text-sm whitespace-pre-wrap">
         {codeParts.map(part => {
           if (part.type === 'code') {
             return (
