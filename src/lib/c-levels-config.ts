@@ -5,6 +5,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 1: Hello, World!',
     description: 'The first step in any programming journey. Complete the code to print "Hello, World!" to the console.',
+    concept: {
+      title: 'Printing Output',
+      explanation: 'In C, the `printf()` function is used to print text to the console. It\'s a fundamental way to see the result of your code. The text you want to print goes inside the parentheses and double quotes.',
+    },
     codeTemplate: [
       '#include <stdio.h>',
       '',
@@ -26,6 +30,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 2: Variables',
     description: 'Variables store data. Declare an integer variable named "age" and assign it the value 25.',
+    concept: {
+        title: 'Variables',
+        explanation: 'Variables are containers for storing data values. In C, you must declare the type of the variable (like `int` for integers) before you use it. You can then assign a value to it using the `=` operator.',
+    },
     codeTemplate: [
       '#include <stdio.h>',
       '',
@@ -46,8 +54,12 @@ export const C_LEVELS: CodingLevel[] = [
     blanks: 1,
   },
   {
-    title: 'Level 3: Simple Loop',
+    title: 'Level 3: For Loops',
     description: 'Loops repeat actions. Complete the `for` loop to count from 0 to 4.',
+    concept: {
+      title: 'For Loops',
+      explanation: 'A `for` loop is used to repeat a block of code a specific number of times. It has three parts: initialization (runs once at the start), condition (checked before each run), and increment (runs after each run).',
+    },
     codeTemplate: [
       '#include <stdio.h>',
       '',
@@ -69,8 +81,12 @@ export const C_LEVELS: CodingLevel[] = [
     blanks: 1,
   },
   {
-    title: 'Level 4: Conditionals',
+    title: 'Level 4: Conditional Statements',
     description: 'Use an `if-else` statement to check if a number is positive or non-positive.',
+    concept: {
+        title: 'If-Else Conditionals',
+        explanation: '`if-else` statements allow your code to make decisions. The code inside the `if` block runs if a condition is true. Otherwise, the code inside the `else` block runs.',
+    },
     codeTemplate: [
       '#include <stdio.h>',
       '',
@@ -100,6 +116,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 5: Functions',
     description: 'Functions group code into reusable blocks. Call the `greet` function.',
+    concept: {
+        title: 'Functions',
+        explanation: 'Functions are named blocks of code that perform a specific task. You can "call" a function to execute its code. This helps organize your program and avoids repeating code.',
+    },
     codeTemplate: [
       '#include <stdio.h>',
       '',
@@ -125,6 +145,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 6: Function with Parameters',
     description: 'Pass data to functions using parameters. Call `add` with two numbers.',
+    concept: {
+        title: 'Function Parameters',
+        explanation: 'Parameters are like special variables for a function. They allow you to pass data into the function when you call it. The function can then use this data to perform its task.',
+    },
     codeTemplate: [
         '#include <stdio.h>',
         '',
@@ -150,6 +174,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 7: Return Values',
     description: 'Functions can return a value. Complete the function to return the product of two numbers.',
+    concept: {
+        title: 'Return Values',
+        explanation: 'A function can send a value back to the code that called it. This is called a "return value". The `return` keyword is used to specify what value the function should send back.',
+    },
     codeTemplate: [
         '#include <stdio.h>',
         '',
@@ -176,6 +204,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 8: While Loops',
     description: 'A `while` loop continues as long as a condition is true. Print numbers from 1 to 3.',
+    concept: {
+        title: 'While Loops',
+        explanation: 'A `while` loop repeatedly executes a block of code as long as a given condition remains true. It\'s useful when you don\'t know exactly how many times you need to loop.',
+    },
     codeTemplate: [
         '#include <stdio.h>',
         '',
@@ -204,6 +236,10 @@ export const C_LEVELS: CodingLevel[] = [
   {
     title: 'Level 9: Arrays',
     description: 'Arrays store multiple values. Access and print the second element of the array.',
+    concept: {
+        title: 'Arrays',
+        explanation: 'An array is a collection of similar data types stored in contiguous memory locations. You can access elements in an array using an index, starting from 0 for the first element.',
+    },
     codeTemplate: [
         '#include <stdio.h>',
         '',
@@ -224,8 +260,12 @@ export const C_LEVELS: CodingLevel[] = [
     blanks: 1,
   },
   {
-    title: 'Level 10: Simple Pointer',
+    title: 'Level 10: Pointers',
     description: 'Pointers store memory addresses. Declare a pointer to an integer `x`.',
+    concept: {
+        title: 'Pointers',
+        explanation: 'A pointer is a variable that stores the memory address of another variable. They are a powerful feature in C for managing memory directly. A `*` is used to declare a pointer and to dereference it (get the value at the address).',
+    },
     codeTemplate: [
         '#include <stdio.h>',
         '',

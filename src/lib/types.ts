@@ -38,6 +38,10 @@ export interface CodeBlock {
 export interface CodingLevel {
   title: string;
   description: string;
+  concept: {
+    title: string;
+    explanation: string;
+  };
   codeTemplate: (string | null)[]; // string for code, null for a blank
   options: CodeBlock[];
   solution: string[]; // array of correct option IDs
