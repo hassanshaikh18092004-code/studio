@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, RefreshCw, Bot, Home, Lightbulb, Puzzle } from 'lucide-react';
+import { Play, RefreshCw, Blocks, Home, Lightbulb, Puzzle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { CodePalette } from '@/components/block-explorers/CodePalette';
 import { CodeEditor } from '@/components/block-explorers/CodeEditor';
@@ -148,7 +148,7 @@ export default function CChallengePage() {
                 <Home className="h-4 w-4" />
               </Button>
             </Link>
-            <Bot className="h-8 w-8 text-primary mr-2 md:mr-3" />
+            <Blocks className="h-8 w-8 text-primary mr-2 md:mr-3" />
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-headline truncate">C Challenge</h1>
           </div>
           <LevelSelect 
