@@ -148,7 +148,7 @@ export default function CChallengePage() {
                 <Home className="h-4 w-4" />
               </Button>
             </Link>
-            <Blocks className="h-8 w-8 text-primary mr-2 md:mr-3" />
+            <Blocks className="h-8 w-8 text-primary-foreground mr-2 md:mr-3" />
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-headline truncate">C Challenge</h1>
           </div>
           <LevelSelect 

@@ -34,7 +34,7 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground font-body p-4">
       <header className="flex items-center justify-center mb-8 text-center">
-        <Blocks className="h-10 w-10 sm:h-12 sm:w-12 text-primary mr-3 sm:mr-4" />
+        <Blocks className="h-10 w-10 sm:h-12 sm:w-12 text-primary-foreground mr-3 sm:mr-4" />
         <div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-headline">Block Explorers</h1>
           <p className="text-base sm:text-lg text-muted-foreground">Welcome Back!</p>
