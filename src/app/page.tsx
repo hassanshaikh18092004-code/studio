@@ -1,26 +1,59 @@
 
 "use client";
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Code, Bot } from 'lucide-react';
+import { Code, Bot, LogOut } from 'lucide-react';
 
 export default function HomePage() {
+  const [user, setUser] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('blockExplorerUser');
+    if (!storedUser) {
+      router.push('/login');
+    } else {
+      setUser(storedUser);
+    }
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('blockExplorerUser');
+    setUser(null);
+    router.push('/login');
+  };
+
+  if (!user) {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
+            <p>Loading...</p>
+        </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground font-body p-4">
-      <header className="flex items-center justify-center mb-8 text-center">
-        <Bot className="h-10 w-10 sm:h-12 sm:w-12 text-primary mr-3 sm:mr-4" />
-        <div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-headline">Block Explorers</h1>
-          <p className="text-base sm:text-lg text-muted-foreground">A Visual Programming Adventure</p>
+      <header className="flex items-center justify-center mb-8 text-center relative w-full max-w-4xl">
+        <div className="flex items-center">
+            <Bot className="h-10 w-10 sm:h-12 sm:w-12 text-primary mr-3 sm:mr-4" />
+            <div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-headline">Block Explorers</h1>
+              <p className="text-base sm:text-lg text-muted-foreground">A Visual Programming Adventure</p>
+            </div>
         </div>
+        <Button onClick={handleLogout} variant="outline" className="absolute top-0 right-0 m-4">
+          <LogOut className="mr-2 h-4 w-4" /> Logout
+        </Button>
       </header>
       <main className="w-full max-w-md sm:max-w-2xl">
         <Card>
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Choose Your Path</CardTitle>
-            <CardDescription>Select a programming language to begin your learning adventure.</CardDescription>
+            <CardDescription>Welcome, {user}! Select a programming language to begin.</CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <Link href="/c" passHref>

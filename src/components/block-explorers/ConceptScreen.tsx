@@ -32,7 +32,7 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
               {level.concept.example && (
                   <div className="mt-4">
                       <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                      <div className="max-h-[40vh] overflow-y-auto bg-[#f5f5f5] p-4 rounded-md border text-black">
+                      <div className="max-h-[40vh] overflow-y-auto bg-card p-4 rounded-md border text-card-foreground">
                          <pre><code>{level.concept.example}</code></pre>
                       </div>
                   </div>

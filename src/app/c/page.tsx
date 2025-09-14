@@ -1,8 +1,9 @@
 
 "use client";
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Play, RefreshCw, Bot, Home, Lightbulb, Puzzle } from 'lucide-react';
@@ -26,27 +27,54 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 
+const PROGRESS_KEY_PREFIX = 'c-progress-';
+
 export default function CChallengePage() {
+  const [user, setUser] = useState<string | null>(null);
   const [levelIndex, setLevelIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(CodeBlockType | null)[]>([]);
   const [gameState, setGameState] = useState<'concept' | 'challenge'>('concept');
   const [isConceptVisible, setIsConceptVisible] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('blockExplorerUser');
+    if (!storedUser) {
+      router.push('/login');
+    } else {
+      setUser(storedUser);
+      const progressKey = `${PROGRESS_KEY_PREFIX}${storedUser}`;
+      const savedLevelIndex = localStorage.getItem(progressKey);
+      const initialLevel = savedLevelIndex ? parseInt(savedLevelIndex, 10) : 0;
+      handleLevelChange(initialLevel, true);
+    }
+  }, [router]);
 
   const currentLevel = useMemo(() => C_LEVELS[levelIndex], [levelIndex]);
 
   const resetLevel = useCallback(() => {
-    setUserAnswers(Array(currentLevel.blanks).fill(null));
+    if (currentLevel) {
+        setUserAnswers(Array(currentLevel.blanks).fill(null));
+    }
   }, [currentLevel]);
 
-  useState(() => {
+  useEffect(() => {
     resetLevel();
-  });
+  }, [levelIndex, resetLevel]);
 
-  const handleLevelChange = (index: number) => {
+  const handleLevelChange = (index: number, isInitialLoad = false) => {
+    if (index >= C_LEVELS.length) index = C_LEVELS.length - 1;
     setLevelIndex(index);
     setUserAnswers(Array(C_LEVELS[index].blanks).fill(null));
-    setGameState('concept');
+    if (!isInitialLoad) {
+        setGameState('concept');
+    }
+    
+    if (user) {
+        const progressKey = `${PROGRESS_KEY_PREFIX}${user}`;
+        localStorage.setItem(progressKey, String(index));
+    }
   };
   
   const handleDrop = (event: DragEndEvent) => {
@@ -101,6 +129,14 @@ export default function CChallengePage() {
   const startChallenge = () => {
     setGameState('challenge');
   };
+
+  if (!user || !currentLevel) {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
+            <p>Loading...</p>
+        </div>
+    );
+  }
 
   return (
     <DndContext onDragEnd={handleDrop} collisionDetection={closestCenter}>
@@ -184,7 +220,7 @@ export default function CChallengePage() {
           {currentLevel.concept.example && (
                 <div className="mt-2">
                     <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                    <div className="max-h-[50vh] overflow-y-auto bg-[#f5f5f5] p-4 rounded-md border text-black">
+                    <div className="max-h-[50vh] overflow-y-auto bg-card p-4 rounded-md border text-card-foreground">
                       <pre><code>{currentLevel.concept.example}</code></pre>
                     </div>
                 </div>

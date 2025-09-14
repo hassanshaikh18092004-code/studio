@@ -55,7 +55,7 @@ export function CodeEditor({ level, userAnswers }: CodeEditorProps) {
   }, [] as { type: 'code' | 'blank'; content: any; key: string }[]);
 
   return (
-    <div className="w-full h-full bg-[#f5f5f5] text-black p-2 sm:p-4 rounded-lg border font-mono text-left overflow-auto">
+    <div className="w-full h-full bg-card text-card-foreground p-2 sm:p-4 rounded-lg border font-mono text-left overflow-auto">
       <pre className="text-xs sm:text-sm whitespace-pre-wrap">
         {codeParts.map(part => {
           if (part.type === 'code') {
