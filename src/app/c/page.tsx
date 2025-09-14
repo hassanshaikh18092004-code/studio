@@ -221,7 +221,7 @@ export default function CChallengePage() {
                 <div className="mt-2">
                     <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
                     <div className="max-h-[50vh] overflow-y-auto bg-card p-4 rounded-md border text-card-foreground">
-                      <pre><code>{currentLevel.concept.example}</code></pre>
+                      <pre><code className="text-sm">{currentLevel.concept.example}</code></pre>
                     </div>
                 </div>
             )}
