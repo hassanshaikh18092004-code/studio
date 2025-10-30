@@ -5,7 +5,7 @@ import { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, RefreshCw, Bot, Home, Lightbulb, Puzzle } from 'lucide-react';
+import { Play, RefreshCw, Blocks, Home, Lightbulb, Puzzle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { CodePalette } from '@/components/block-explorers/CodePalette';
 import { CodeEditor } from '@/components/block-explorers/CodeEditor';
@@ -112,7 +112,7 @@ export default function PythonChallengePage() {
                 <Home className="h-4 w-4" />
               </Button>
             </Link>
-            <Bot className="h-8 w-8 text-primary mr-2 md:mr-3" />
+            <Blocks className="h-8 w-8 text-primary-foreground mr-2 md:mr-3" />
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-headline truncate">Python Challenge</h1>
           </div>
           <LevelSelect 
@@ -184,8 +184,8 @@ export default function PythonChallengePage() {
           {currentLevel.concept.example && (
                 <div className="mt-2">
                     <h4 className="text-md font-semibold mb-2 text-foreground/80">Example:</h4>
-                    <div className="max-h-[50vh] overflow-y-auto bg-[#f5f5f5] p-4 rounded-md border text-black">
-                      <pre><code>{currentLevel.concept.example}</code></pre>
+                    <div className="max-h-[50vh] overflow-y-auto bg-card p-4 rounded-md border text-card-foreground">
+                      <pre><code className="text-sm">{currentLevel.concept.example}</code></pre>
                     </div>
                 </div>
             )}
