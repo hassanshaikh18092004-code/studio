@@ -54,7 +54,7 @@ export default function HomePage() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link href="/c" passHref>
-              <Button variant="outline" className="w-full h-28 text-xl flex-col gap-2 transition-transform transform hover:scale-105">
+              <Button variant="outline" className="w-full h-28 text-xl flex-col gap-2">
                   <div className='flex items-center'>
                     <Code className="h-7 w-7 mr-2" />
                     <span>C</span>
@@ -63,7 +63,7 @@ export default function HomePage() {
               </Button>
             </Link>
             <Link href="/python" passHref>
-              <Button variant="outline" className="w-full h-28 text-xl flex-col gap-2 transition-transform transform hover:scale-105">
+              <Button variant="outline" className="w-full h-28 text-xl flex-col gap-2">
                 <div className='flex items-center'>
                     <Code className="h-7 w-7 mr-2" />
                     <span>Python</span>
