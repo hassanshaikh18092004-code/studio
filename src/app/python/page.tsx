@@ -31,7 +31,7 @@ const PROGRESS_KEY_PREFIX = 'python-progress-';
 
 export default function PythonChallengePage() {
   const [user, setUser] = useState<string | null>(null);
-  const [levelIndex, setLevelIndex]_useState(0);
+  const [levelIndex, setLevelIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(CodeBlockType | null)[]>([]);
   const [gameState, setGameState] = useState<'concept' | 'challenge'>('concept');
   const [isConceptVisible, setIsConceptVisible] = useState(false);
