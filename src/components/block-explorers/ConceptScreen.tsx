@@ -18,15 +18,15 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
       <div className="flex items-center justify-center min-h-full p-1">
         <Card className="w-full max-w-3xl">
           <CardHeader className="text-center">
-            <div className="flex justify-center items-center mb-4">
-              <Lightbulb className="h-8 md:h-10 w-8 md:w-10 text-primary mr-3" />
+            <div className="flex justify-center items-center mb-2 sm:mb-4">
+              <Lightbulb className="h-8 w-8 text-primary mr-3" />
               <CardTitle className="text-2xl md:text-3xl font-bold">{level.concept.title}</CardTitle>
             </div>
-            <CardDescription className="text-base md:text-lg">Level {level.title.split(':')[0].replace('Level ','')} - Let's learn a new concept!</CardDescription>
+            <CardDescription className="text-base">Level {level.title.split(':')[0].replace('Level ','')} - Let's learn a new concept!</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="bg-muted/50 p-4 md:p-6 rounded-lg mb-6">
-              <p className="text-base md:text-lg text-foreground leading-relaxed">
+            <div className="bg-muted/50 p-4 rounded-lg mb-6">
+              <p className="text-base text-foreground leading-relaxed">
                 {level.concept.explanation}
               </p>
               {level.concept.example && (
@@ -38,8 +38,8 @@ export function ConceptScreen({ level, onStart }: ConceptScreenProps) {
                   </div>
               )}
             </div>
-            <Button onClick={onStart} className="w-full text-xl py-7">
-              <Puzzle className="mr-2 h-6 w-6" />
+            <Button onClick={onStart} className="w-full text-lg sm:text-xl py-6 sm:py-7">
+              <Puzzle className="mr-2 h-5 sm:h-6 w-5 sm:w-6" />
               Start Puzzle
             </Button>
           </CardContent>

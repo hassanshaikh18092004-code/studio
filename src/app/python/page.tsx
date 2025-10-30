@@ -31,7 +31,7 @@ const PROGRESS_KEY_PREFIX = 'python-progress-';
 
 export default function PythonChallengePage() {
   const [user, setUser] = useState<string | null>(null);
-  const [levelIndex, setLevelIndex] = useState(0);
+  const [levelIndex, setLevelIndex]_useState(0);
   const [userAnswers, setUserAnswers] = useState<(CodeBlockType | null)[]>([]);
   const [gameState, setGameState] = useState<'concept' | 'challenge'>('concept');
   const [isConceptVisible, setIsConceptVisible] = useState(false);
@@ -140,7 +140,7 @@ export default function PythonChallengePage() {
 
   return (
     <DndContext onDragEnd={handleDrop} collisionDetection={closestCenter}>
-      <div className="flex flex-col h-screen bg-background text-foreground font-body p-4 lg:p-6 gap-4 lg:p-6">
+      <div className="flex flex-col h-screen bg-background text-foreground font-body p-4 lg:p-6 gap-4">
         <header className="flex items-center justify-between flex-shrink-0">
           <div className="flex items-center">
             <Link href="/" passHref>
@@ -149,7 +149,7 @@ export default function PythonChallengePage() {
               </Button>
             </Link>
             <Blocks className="h-8 w-8 text-primary-foreground mr-2 md:mr-3" />
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-headline truncate">Python Challenge</h1>
+            <h1 className="text-xl md:text-2xl font-bold font-headline truncate">Python Challenge</h1>
           </div>
           <LevelSelect 
               currentLevel={levelIndex}
@@ -166,7 +166,7 @@ export default function PythonChallengePage() {
             />
           </main>
         ) : (
-          <main className="grid lg:grid-cols-2 gap-4 lg:gap-6 flex-grow min-h-0">
+          <main className="grid lg:grid-cols-2 gap-4 flex-grow min-h-0">
             <div className="flex flex-col gap-4 flex-grow min-h-0">
                 <Card className="flex-grow flex flex-col">
                     <CardHeader>
@@ -181,7 +181,7 @@ export default function PythonChallengePage() {
                             </Button>
                         </div>
                     </CardHeader>
-                    <CardContent className="flex-grow flex items-center justify-center p-2 sm:p-6">
+                    <CardContent className="flex-grow flex items-center justify-center p-2 sm:p-4">
                         <CodeEditor
                             level={currentLevel}
                             userAnswers={userAnswers}
@@ -189,11 +189,11 @@ export default function PythonChallengePage() {
                     </CardContent>
                 </Card>
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <Button onClick={checkAnswer} className="w-full text-lg py-6">
+                    <Button onClick={checkAnswer} className="w-full text-lg py-6 sm:py-4">
                         <Play className="mr-2 h-5 w-5" />
                         Check Answer
                     </Button>
-                    <Button onClick={resetLevel} variant="outline" className="w-full text-lg py-6">
+                    <Button onClick={resetLevel} variant="outline" className="w-full text-lg py-6 sm:py-4">
                         <RefreshCw className="mr-2 h-5 w-5" />
                         Reset
                     </Button>
@@ -209,7 +209,7 @@ export default function PythonChallengePage() {
       <Dialog open={isConceptVisible} onOpenChange={setIsConceptVisible}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-2xl">
+            <DialogTitle className="flex items-center gap-2 text-xl md:text-2xl">
                 <Lightbulb className="h-6 w-6 text-primary" />
                 {currentLevel.concept.title}
             </DialogTitle>
